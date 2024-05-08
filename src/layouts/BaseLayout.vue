@@ -4,7 +4,9 @@
       <img class="header-logo-image" src="@/assets/image/logo.png" alt="logo" />
       <div class="header-logo-text">MyBlog</div>
     </a>
-    <slot name="header" class="header-menus"></slot>
+    <div>
+      <slot name="header" class="header-menus"></slot>
+    </div>
   </header>
   <main><slot></slot></main>
 </template>
