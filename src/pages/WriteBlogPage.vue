@@ -1,11 +1,11 @@
 <template>
-  <BaseLayout>
+  <base-layout>
     <template #header>
-      <VbButton>Delete</VbButton>
-      <VbButton>Save</VbButton>
-      <VbButton>Publish</VbButton>
+      <vb-button>Delete</vb-button>
+      <vb-button>Save</vb-button>
+      <vb-button>Publish</vb-button>
     </template>
-  </BaseLayout>
+  </base-layout>
 </template>
 
 <script setup lang="ts">
