@@ -4,8 +4,8 @@
       <img class="header-logo-image" src="@/assets/image/logo.png" alt="logo" />
       <div class="header-logo-text">MyBlog</div>
     </a>
-    <div>
-      <slot name="header" class="header-menus"></slot>
+    <div class="header-menus">
+      <slot name="header"></slot>
     </div>
   </header>
   <main><slot></slot></main>
@@ -43,6 +43,13 @@ header {
     font-size: $header-height * 0.6;
     font-weight: bold;
   }
+}
+
+.header-menus {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: auto;
 }
 </style>
 
