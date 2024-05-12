@@ -99,7 +99,7 @@ const saveBlog = () => {
 const leavePage = () => {
   const yes = confirm('Are you sure you want to leave this page?')
   if (yes) {
-    router.push('/')
+    router.push({ name: 'list-blog' })
   }
 }
 

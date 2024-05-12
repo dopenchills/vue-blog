@@ -90,6 +90,6 @@ const blogs: Blog[] = [
 ]
 
 const moveToWritePage = () => {
-  router.push('/write')
+  router.push({ name: 'write-blog' })
 }
 </script>
