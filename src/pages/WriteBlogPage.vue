@@ -76,6 +76,10 @@ import BaseLayout from '@/layouts/BaseLayout.vue'
 const router = useRouter()
 
 // Get user information
+const user: User = {
+  id: 0,
+  name: 'John Doe'
+}
 
 // Get title and content of the blog
 const blogTitle = ref('')
@@ -83,8 +87,13 @@ const blogContent = ref('')
 
 // Handler for delete, save, and publish buttons
 const saveBlog = () => {
-  console.log('blogTitle:', blogTitle.value)
-  console.log('blogContent:', blogContent.value)
+  const blog: Blog = {
+    id: 0,
+    title: blogTitle.value,
+    content: blogContent.value,
+    owner: user
+  }
+  console.log('Saving the blog...', blog)
 }
 
 const leavePage = () => {
