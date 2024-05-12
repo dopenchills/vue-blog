@@ -1,18 +1,26 @@
 <template>
   <base-layout>
     <template #header>
-      <vb-button>Delete</vb-button>
-      <vb-button>Save</vb-button>
-      <vb-button>Publish</vb-button>
+      <vb-button @click="leavePage">Delete</vb-button>
+      <vb-button @click="saveBlog">Save</vb-button>
+      <vb-button @click="publishBlog">Publish</vb-button>
     </template>
 
-    <input class="blog-title" type="text" name="blog-title" placeholder="Title" />
+    <input
+      class="blog-title"
+      type="text"
+      name="blog-title"
+      placeholder="Title"
+      v-model="blogTitle"
+    />
     <div class="vertical-space"></div>
     <div
       class="blog-content"
       name="blog-content"
       contenteditable="true"
       data-placeholder="Type something here..."
+      v-text="blogContent"
+      @input="blogContent = ($event?.target as HTMLDivElement).innerText"
     ></div>
   </base-layout>
 </template>
@@ -59,6 +67,36 @@ div[contenteditable='true']:empty:before {
 </style>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
 import VbButton from '@/components/buttons/VbButton.vue'
 import BaseLayout from '@/layouts/BaseLayout.vue'
+
+const router = useRouter()
+
+// Get user information
+
+// Get title and content of the blog
+const blogTitle = ref('')
+const blogContent = ref('')
+
+// Handler for delete, save, and publish buttons
+const saveBlog = () => {
+  console.log('blogTitle:', blogTitle.value)
+  console.log('blogContent:', blogContent.value)
+}
+
+const leavePage = () => {
+  const yes = confirm('Are you sure you want to leave this page?')
+  if (yes) {
+    router.push('/')
+  }
+}
+
+const publishBlog = () => {
+  console.log('Publishing the blog...')
+  console.log('blogTitle:', blogTitle.value)
+  console.log('blogContent:', blogContent.value)
+}
 </script>
