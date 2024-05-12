@@ -51,6 +51,13 @@ header {
   align-items: center;
   width: auto;
 }
+
+main {
+  margin: 50px;
+  @media (max-width: 768px) {
+    margin: 20px;
+  }
+}
 </style>
 
 <script setup lang="ts"></script>
