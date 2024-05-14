@@ -13,9 +13,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-  - script: echo $(deployment_token)!
-    displayName: 'Run a one-line script'
-
   - task: UseNode@1
     displayName: 'Install Node.js'
     inputs:
