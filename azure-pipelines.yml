@@ -17,16 +17,21 @@ steps:
     displayName: 'Run a one-line script'
 
   - task: UseNode@1
+    displayName: 'Install Node.js'
     inputs:
       version: 20.x
 
   - script: npm install --global yarn
+    displayName: 'Install Yarn'
 
   - script: yarn install
+    displayName: 'Install dependencies'
 
   - script: yarn build
+    displayName: 'Build the app'
 
   - task: AzureStaticWebApp@0
+    displayName: 'Deploy to Azure Static Web App'
     inputs:
       app_location: 'dist'
       skip_app_build: true
