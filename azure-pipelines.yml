@@ -4,21 +4,30 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+  - main
+
+variables:
+  - group: 'frontend-production'
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+  - script: echo $(deployment_token)!
+    displayName: 'Run a one-line script'
 
-- task: UseNode@1
-  inputs:
-    version: 20.x
+  - task: UseNode@1
+    inputs:
+      version: 20.x
 
-- script: npm install --global yarn
+  - script: npm install --global yarn
 
-- script: yarn install
+  - script: yarn install
 
-- script: yarn build
+  - script: yarn build
+
+  - task: AzureStaticWebApp@0
+    inputs:
+      app_location: 'dist'
+      skip_app_build: true
+      azure_static_web_apps_api_token: $(deployment_token)
