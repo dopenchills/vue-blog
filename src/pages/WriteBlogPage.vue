@@ -21,7 +21,10 @@
       data-placeholder="Type something here..."
       v-text="blogContent"
       @input="blogContent = ($event?.target as HTMLDivElement).innerText"
+      @keypress.enter="onNewline"
     ></div>
+    <div class="vertical-space"></div>
+    <div>Character count: {{ characterCount }}</div>
   </base-layout>
 </template>
 
@@ -57,6 +60,8 @@ div.blog-content {
 
   color: $text-color;
   font-size: $blog-content-font-size;
+
+  white-space: pre;
 }
 
 div[contenteditable='true']:empty:before {
@@ -67,7 +72,7 @@ div[contenteditable='true']:empty:before {
 </style>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 import VbButton from '@/components/buttons/VbButton.vue'
@@ -84,6 +89,7 @@ const user: User = {
 // Get title and content of the blog
 const blogTitle = ref('')
 const blogContent = ref('')
+const characterCount = ref(0)
 
 // Handler for delete, save, and publish buttons
 const saveBlog = () => {
@@ -108,4 +114,12 @@ const publishBlog = () => {
   console.log('blogTitle:', blogTitle.value)
   console.log('blogContent:', blogContent.value)
 }
+
+const onNewline = (e: KeyboardEvent) => {
+  // Move cursor to the next line of the current cursor
+}
+
+watch(blogContent, (newValue) => {
+  characterCount.value = newValue.length
+})
 </script>
