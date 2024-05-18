@@ -57,10 +57,16 @@ import { useRouter } from 'vue-router'
 import VbButton from '@/components/buttons/VbButton.vue'
 import { useMockBlogs } from '@/composables/useMockBlogs'
 import BaseLayout from '@/layouts/BaseLayout.vue'
+import { onMounted, ref } from 'vue'
 
 const router = useRouter()
+const maybeArticle = ref<Blog | undefined>(undefined)
 const articleId = Number(router.currentRoute.value.params.id)
 
-const { getBlogById } = useMockBlogs()
-const maybeArticle = getBlogById(articleId)
+const { getArticles } = useMockBlogs()
+
+onMounted(() => {
+  const article = getArticles().find((article) => article.id === articleId)
+  maybeArticle.value = article
+})
 </script>

@@ -67,7 +67,8 @@ import { RouterLink, useRouter } from 'vue-router'
 
 const router = useRouter()
 
-const { blogs } = useMockBlogs()
+const { getArticles } = useMockBlogs()
+const blogs = getArticles()
 
 const moveToWritePage = () => {
   router.push({ name: 'write-blog' })
