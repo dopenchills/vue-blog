@@ -32,6 +32,13 @@
     ></div>
     <div class="vertical-space"></div>
     <div>Character count: {{ characterCount }}</div>
+    <div class="modal" v-if="showModal">
+      <div class="modal-dialog">
+        <p>Are you sure you publish the blog right now?</p>
+        <vb-button @click="showModal = false">Cancel</vb-button>
+        <vb-button @click="showModal = false">Publish</vb-button>
+      </div>
+    </div>
   </base-layout>
 </template>
 
@@ -81,6 +88,26 @@ div[contenteditable='true']:empty:before {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+
+  .modal-dialog {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding: 20px;
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+  }
+}
 </style>
 
 <script setup lang="ts">
@@ -101,6 +128,7 @@ const user: User = {
 // Get title and content of the blog
 const blogTitle = ref('')
 const blogContent = ref('')
+const showModal = ref(false)
 
 // Handler for delete, save, and publish buttons
 const saveBlog = () => {
@@ -124,6 +152,7 @@ const publishBlog = () => {
   console.log('Publishing the blog...')
   console.log('blogTitle:', blogTitle.value)
   console.log('blogContent:', blogContent.value)
+  showModal.value = true
 }
 
 const onNewline = (e: KeyboardEvent) => {
