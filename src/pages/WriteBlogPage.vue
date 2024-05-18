@@ -111,13 +111,16 @@ div[contenteditable='true']:empty:before {
 </style>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 
 import VbButton from '@/components/buttons/VbButton.vue'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 
+import { useMockBlogs } from '@/composables/useMockBlogs'
+
 const router = useRouter()
+const { saveArticleDraft } = useMockBlogs()
 
 // Get user information
 const user: User = {
@@ -128,17 +131,18 @@ const user: User = {
 // Get title and content of the blog
 const blogTitle = ref('')
 const blogContent = ref('')
+const blogId = Math.ceil(Math.random() * 100000)
 const showModal = ref(false)
 
 // Handler for delete, save, and publish buttons
 const saveBlog = () => {
   const blog: Blog = {
-    id: 0,
+    id: blogId,
     title: blogTitle.value,
     content: blogContent.value,
     owner: user
   }
-  console.log('Saving the blog...', blog)
+  saveArticleDraft(blog)
 }
 
 const leavePage = () => {
@@ -158,6 +162,12 @@ const publishBlog = () => {
 const onNewline = (e: KeyboardEvent) => {
   // Move cursor to the next line of the current cursor
 }
+
+watchEffect(() => {
+  if (blogTitle.value.length !== 0 || blogContent.value.length !== 0) {
+    saveBlog()
+  }
+})
 
 const characterCount = computed(() => blogContent.value.length)
 const isContentEmpty = computed(() => blogContent.value.length === 0)

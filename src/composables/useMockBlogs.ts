@@ -37,9 +37,27 @@ export function useMockBlogs() {
     }
   })
 
+  const syncArticles = () => {
+    localStorage.setItem(LOCALSTORAGE_ARTICLES_KEY, JSON.stringify(articles))
+  }
+
   const getArticles = () => {
     return articles
   }
 
-  return { getArticles }
+  const saveArticleDraft = (article: Blog) => {
+    // articles.push(article)
+    const articleExists = articles.find((a) => a.id === article.id)
+
+    if (articleExists) {
+      const index = articles.findIndex((a) => a.id === article.id)
+      articles[index] = article
+    } else {
+      articles.push(article)
+    }
+
+    syncArticles()
+  }
+
+  return { getArticles, saveArticleDraft }
 }
