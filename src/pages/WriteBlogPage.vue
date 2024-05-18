@@ -37,7 +37,9 @@
       <div class="modal-dialog">
         <p>Are you sure you publish the blog right now?</p>
         <vb-button @click="showModal = false">Cancel</vb-button>
-        <vb-button @click="showModal = false">Publish</vb-button>
+        <vb-button @click="showModal = false" color="white" background-color="green"
+          >Publish</vb-button
+        >
       </div>
     </div>
   </base-layout>

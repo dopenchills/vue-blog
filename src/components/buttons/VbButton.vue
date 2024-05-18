@@ -1,5 +1,5 @@
 <template>
-  <button class="button">
+  <button class="button" :style="style">
     <slot></slot>
   </button>
 </template>
@@ -21,3 +21,23 @@
   }
 }
 </style>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const { color, backgroundColor } = withDefaults(
+  defineProps<{
+    color?: string
+    backgroundColor?: string
+  }>(),
+  {
+    color: 'black',
+    backgroundColor: 'white'
+  }
+)
+
+const style = ref({
+  color,
+  backgroundColor
+})
+</script>
