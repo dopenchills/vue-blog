@@ -22,15 +22,7 @@
       ref="blogTitleInput"
     />
     <div class="vertical-space"></div>
-    <div
-      class="blog-content"
-      name="blog-content"
-      contenteditable="true"
-      data-placeholder="Type something here..."
-      v-text="blogContent"
-      @input="blogContent = ($event?.target as HTMLDivElement).innerText"
-      @keypress.enter="onNewline"
-    ></div>
+    <blog-content v-model="blogContent" />
     <div class="vertical-space"></div>
     <div>Character count: {{ characterCount }}</div>
     <div class="modal" v-if="showModal">
@@ -69,24 +61,6 @@ input[type='text'].blog-title {
   height: 50px;
 }
 
-div.blog-content {
-  width: 100%;
-  min-height: 300px;
-
-  padding: 10px;
-
-  color: $text-color;
-  font-size: $blog-content-font-size;
-
-  white-space: pre;
-}
-
-div[contenteditable='true']:empty:before {
-  content: attr(data-placeholder);
-  color: $placeholder-color;
-  cursor: text;
-}
-
 .disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -119,6 +93,8 @@ import { useRouter } from 'vue-router'
 
 import VbButton from '@/components/buttons/VbButton.vue'
 import BaseLayout from '@/layouts/BaseLayout.vue'
+
+import BlogContent from '@/components/write-blog/BlogContent.vue'
 
 import { useMockBlogs } from '@/composables/useMockBlogs'
 
@@ -166,10 +142,6 @@ const publishBlog = () => {
   console.log('blogTitle:', blogTitle.value)
   console.log('blogContent:', blogContent.value)
   showModal.value = true
-}
-
-const onNewline = (e: KeyboardEvent) => {
-  // Move cursor to the next line of the current cursor
 }
 
 watchEffect(() => {
