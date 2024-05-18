@@ -8,7 +8,7 @@
 
     <div class="blog-container">
       <div v-for="blog in blogs" :key="blog.id" class="blog">
-        <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none; color: inherit">
+        <router-link :to="`/articles/${blog.id}`" style="text-decoration: none; color: inherit">
           <p class="blog-title">{{ blog.title }}</p>
           <p class="blog-content">{{ blog.content }}</p>
           <p class="blog-owner-name">{{ blog.owner.name }}</p>
