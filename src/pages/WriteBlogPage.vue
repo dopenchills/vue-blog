@@ -19,6 +19,7 @@
       name="blog-title"
       placeholder="Title"
       v-model="blogTitle"
+      ref="blogTitleInput"
     />
     <div class="vertical-space"></div>
     <div
@@ -111,7 +112,7 @@ div[contenteditable='true']:empty:before {
 </style>
 
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue'
+import { computed, onMounted, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 
 import VbButton from '@/components/buttons/VbButton.vue'
@@ -133,6 +134,12 @@ const blogTitle = ref('')
 const blogContent = ref('')
 const blogId = Math.ceil(Math.random() * 100000)
 const showModal = ref(false)
+
+const blogTitleInput = ref<HTMLInputElement | null>(null)
+
+onMounted(() => {
+  blogTitleInput.value?.focus()
+})
 
 // Handler for delete, save, and publish buttons
 const saveBlog = () => {
