@@ -2,8 +2,15 @@
   <base-layout>
     <template #header>
       <vb-button @click="leavePage">Delete</vb-button>
-      <vb-button @click="saveBlog">Save</vb-button>
-      <vb-button @click="publishBlog">Publish</vb-button>
+      <vb-button @click="saveBlog" :class="{ disabled: isContentEmpty }" :disabled="isContentEmpty"
+        >Save</vb-button
+      >
+      <vb-button
+        @click="publishBlog"
+        :class="{ disabled: isContentEmpty }"
+        :disabled="isContentEmpty"
+        >Publish</vb-button
+      >
     </template>
 
     <input
@@ -69,6 +76,11 @@ div[contenteditable='true']:empty:before {
   color: $placeholder-color;
   cursor: text;
 }
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 </style>
 
 <script setup lang="ts">
@@ -119,4 +131,5 @@ const onNewline = (e: KeyboardEvent) => {
 }
 
 const characterCount = computed(() => blogContent.value.length)
+const isContentEmpty = computed(() => blogContent.value.length === 0)
 </script>
