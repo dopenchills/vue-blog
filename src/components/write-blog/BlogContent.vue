@@ -1,12 +1,13 @@
 <template>
   <div
-    class="blog-content"
-    name="blog-content"
-    contenteditable="true"
+    v-for="(paragraph, i) in paragraphs"
+    :key="i"
     data-placeholder="Type something here..."
-    v-text="blogContent"
-    @input="blogContent = ($event?.target as HTMLDivElement).innerText"
-    @keypress.enter="onNewline"
+    class="blog-content"
+    contenteditable="true"
+    v-text="paragraph"
+    @input="paragraphs[i] = ($event?.target as HTMLDivElement).innerText"
+    @keypress.enter="createNewParagraph(i)"
   ></div>
 </template>
 
@@ -15,7 +16,7 @@
 
 div.blog-content {
   width: 100%;
-  min-height: 300px;
+  height: calc($blog-content-font-size * 1.5);
 
   padding: 10px;
 
@@ -33,9 +34,28 @@ div[contenteditable='true']:empty:before {
 </style>
 
 <script setup lang="ts">
-const blogContent = defineModel()
+import { ref, watchEffect } from 'vue'
 
-const onNewline = (e: KeyboardEvent) => {
-  // Move cursor to the next line of the current cursor
+const model = defineModel()
+let paragraphs = ref<string[]>([''])
+
+const createNewParagraph = (index: number) => {
+  paragraphs.value = [
+    ...paragraphs.value.slice(0, index + 1),
+    '',
+    ...paragraphs.value.slice(index + 1)
+  ]
+
+  setTimeout(() => {
+    const newParagraphIndex = index + 1
+    const newParagraph = document.querySelectorAll('.blog-content')[newParagraphIndex] as
+      | HTMLDivElement
+      | undefined
+    newParagraph?.focus()
+  }, 50)
 }
+
+watchEffect(() => {
+  model.value = paragraphs.value.join('\n')
+})
 </script>
