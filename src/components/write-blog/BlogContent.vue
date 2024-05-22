@@ -2,7 +2,7 @@
   <div
     v-for="(paragraph, i) in paragraphs"
     :key="i"
-    data-placeholder="Type something here..."
+    :data-placeholder="$t('blog.content.placeholder')"
     class="blog-content"
     contenteditable="true"
     v-text="paragraph"
