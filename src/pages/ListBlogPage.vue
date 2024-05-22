@@ -15,6 +15,10 @@
         </router-link>
       </div>
     </div>
+    <div v-report-mount>
+      This component actually should not be mounted, but mounted. This is a test for a directive
+      called <code>v-report-mount</code>.
+    </div>
   </base-layout>
 </template>
 
@@ -62,6 +66,7 @@
 <script setup lang="ts">
 import VbButton from '@/components/buttons/VbButton.vue'
 import { useMockBlogs } from '@/composables/useMockBlogs'
+import { vReportMount } from '@/directives/vReportMount'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import { RouterLink, useRouter } from 'vue-router'
 
