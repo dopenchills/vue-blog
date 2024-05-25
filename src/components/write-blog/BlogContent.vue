@@ -39,7 +39,7 @@ div[contenteditable='true']:empty:before {
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
 
-const model = defineModel()
+const articleString = defineModel()
 let paragraphs = ref<string[]>([''])
 
 const createNewParagraph = (index: number) => {
@@ -71,6 +71,6 @@ const focusParagraph = (index: number) => {
 }
 
 watchEffect(() => {
-  model.value = paragraphs.value.join('\n')
+  articleString.value = paragraphs.value.join('\n')
 })
 </script>
