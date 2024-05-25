@@ -1,4 +1,5 @@
 import ListBlogPage from '@/pages/ListBlogPage.vue'
+import ProfilePage from '@/pages/ProfilePage.vue'
 import ShowBlogPage from '@/pages/ShowBlogPage.vue'
 import WriteBlogPage from '@/pages/WriteBlogPage.vue'
 import FlexTest from '@/pages/experiment/FlexTest.vue'
@@ -8,5 +9,6 @@ export const routes: RouteRecordRaw[] = [
   { path: '/', component: ListBlogPage, name: 'list-blog' },
   { path: '/write', component: WriteBlogPage, name: 'write-blog' },
   { path: '/articles/:id', component: ShowBlogPage, name: 'show-blog' },
-  { path: '/experiment/flex', component: FlexTest, name: 'flex' }
+  { path: '/experiment/flex', component: FlexTest, name: 'flex' },
+  { path: '/profile', component: ProfilePage, name: 'profile' }
 ]
