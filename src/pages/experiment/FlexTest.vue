@@ -142,9 +142,106 @@
       <li>Initial value is <code>auto</code></li>
     </ul>
     <caption>
-      The examples are coming soon...
+      <code>flex-basis: auto</code>
+      just have the content size
     </caption>
-    <div class="flex-container"></div>
+    <div class="flex-container">
+      <div class="flex-item" style="flex-basis: auto">flex-basis: auto</div>
+    </div>
+    <caption>
+      <code>flex-basis: auto; width: 100%</code>
+      will have the width of 100%
+    </caption>
+    <div class="flex-container">
+      <div class="flex-item" style="flex-basis: auto; width: 100%">
+        flex-basis: auto; width: 100%
+      </div>
+    </div>
+    <caption>
+      Even if I set
+      <code>flex-basis: 100%</code
+      >, the item will not have the width of 100% if there is other flex-items. It is reasonable as
+      the default value of
+      <code>flex-shrink</code>
+      is 1.
+    </caption>
+    <div class="flex-container">
+      <div class="flex-item" style="flex-basis: auto">flex-basis: auto</div>
+      <div class="flex-item" style="flex-basis: auto; width: 100%">
+        flex-basis: auto; width: 100%
+      </div>
+    </div>
+    <caption>
+      <code>flex-basis: min-content</code>
+      will have the width of the smallest size a box can take without overflowing its content. In
+      the case below, the width is determined by the longest word.
+    </caption>
+    <div class="flex-container">
+      <div class="flex-item" style="flex-basis: min-content">flex-basis: min-content</div>
+    </div>
+    <caption>
+      <code>flex-basis: max-content</code>
+      will have the width of the ideal size a box can take when given infinite space. In the case
+      below, the width is determined by the whole sentence.
+    </caption>
+    <div class="flex-container" style="width: 500px">
+      <div class="flex-item" style="flex-basis: max-content">flex-basis: max-content</div>
+    </div>
+    <caption>
+      Even if I set
+      <code>flex-basis: max-content</code>
+      that is larger than the container, the item will not overflow.
+      <code>flex-basis</code>
+      just sets the initial size of the item.
+    </caption>
+    <div class="flex-container" style="width: 500px">
+      <div class="flex-item" style="flex-basis: max-content">flex-basis: max-content</div>
+      <div class="flex-item" style="flex-basis: max-content">flex-basis: max-content</div>
+      <div class="flex-item" style="flex-basis: max-content">flex-basis: max-content</div>
+    </div>
+    <caption>
+      <code>flex-basis: fit-content</code>
+      will have the width of the ideal size a box can take when given infinite space. In the case
+      below, the width is determined by the whole sentence.
+    </caption>
+    <div class="flex-container" style="width: 500px">
+      <div class="flex-item" style="flex-basis: fit-content">flex-basis: fit-content</div>
+    </div>
+    <caption>
+      Even if I set
+      <code>flex-basis: fit-content</code>
+      that is larger than the container, the item will not overflow.
+      <code>flex-basis</code>
+      just sets the initial size of the item. The behavior is the same as
+      <code>max-content</code
+      >.
+    </caption>
+    <div class="flex-container" style="width: 500px">
+      <div class="flex-item" style="flex-basis: fit-content">flex-basis: fit-content</div>
+      <div class="flex-item" style="flex-basis: fit-content">flex-basis: fit-content</div>
+      <div class="flex-item" style="flex-basis: fit-content">flex-basis: fit-content</div>
+    </div>
+    <caption>
+      <code>flex-basis: content</code>
+      It looks the same as
+      <code>max-content</code>
+      and
+      <code>fit-content</code
+      >. Are there any differences? ChatGPT 4o says that use
+      <code>auto</code>
+      instead of
+      <code>content</code
+      >.
+    </caption>
+    <div class="flex-container" style="width: 500px">
+      <div class="flex-item" style="flex-basis: content">flex-basis: content</div>
+    </div>
+    <div class="flex-container" style="width: 500px">
+      <div class="flex-item" style="flex-basis: content">flex-basis: content</div>
+      <div class="flex-item" style="flex-basis: content">flex-basis: content</div>
+      <div class="flex-item" style="flex-basis: content">flex-basis: content</div>
+      <div class="flex-item" style="flex-basis: content">flex-basis: content</div>
+    </div>
   </div>
 </template>
 
