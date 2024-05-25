@@ -22,7 +22,14 @@
       ref="blogTitleInput"
     />
     <div class="vertical-space"></div>
-    <blog-content v-model="blogContent" />
+    <blog-content
+      v-model="blogContent"
+      @inappropriate-words="
+        (words) => {
+          console.log(`inappropriate words: ${words}`)
+        }
+      "
+    />
     <div class="vertical-space"></div>
     <div>Character count: {{ characterCount }}</div>
     <div class="modal" v-if="showModal">

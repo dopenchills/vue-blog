@@ -39,8 +39,14 @@ div[contenteditable='true']:empty:before {
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
 
-const articleString = defineModel()
+const INAPPROPRIATE_WORDS = ['fuck', 'shit', 'asshole']
+
+const articleString = defineModel<string>()
 let paragraphs = ref<string[]>([''])
+
+const emit = defineEmits<{
+  (e: 'inappropriate-words', words: string[]): void
+}>()
 
 const createNewParagraph = (index: number) => {
   paragraphs.value = [
@@ -72,5 +78,18 @@ const focusParagraph = (index: number) => {
 
 watchEffect(() => {
   articleString.value = paragraphs.value.join('\n')
+
+  const words = articleString.value.split(/[\s,.]/)
+  const foundInappropriateWords = words.filter((word) => {
+    for (const inappropriateWord of INAPPROPRIATE_WORDS) {
+      if (word.toLowerCase().includes(inappropriateWord)) {
+        return true
+      }
+    }
+  })
+
+  if (foundInappropriateWords.length > 0) {
+    emit('inappropriate-words', foundInappropriateWords)
+  }
 })
 </script>
