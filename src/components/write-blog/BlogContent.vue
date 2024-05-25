@@ -1,14 +1,17 @@
 <template>
-  <div
-    v-for="(paragraph, i) in paragraphs"
-    :key="i"
-    :data-placeholder="$t('blog.content.placeholder')"
-    class="blog-content"
-    contenteditable="true"
-    v-text="paragraph"
-    @input="paragraphs[i] = ($event?.target as HTMLDivElement).innerText"
-    @keypress.enter="createNewParagraph(i)"
-  ></div>
+  <div>
+    <div
+      v-for="(paragraph, i) in paragraphs"
+      :key="i"
+      :data-placeholder="$t('blog.content.placeholder')"
+      class="blog-content"
+      contenteditable="true"
+      v-text="paragraph"
+      @input="paragraphs[i] = ($event?.target as HTMLDivElement).innerText"
+      @keypress.enter="createNewParagraph(i)"
+      @keydown.delete="deleteCurrentParagraph(i)"
+    ></div>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -46,12 +49,24 @@ const createNewParagraph = (index: number) => {
     ...paragraphs.value.slice(index + 1)
   ]
 
+  focusParagraph(index + 1)
+}
+
+const deleteCurrentParagraph = (index: number) => {
+  if (paragraphs.value.length === 1) return
+  if (paragraphs.value[index] !== '') return
+
+  paragraphs.value = paragraphs.value.filter((_, i) => i !== index)
+
+  focusParagraph(index - 1)
+}
+
+const focusParagraph = (index: number) => {
   setTimeout(() => {
-    const newParagraphIndex = index + 1
-    const newParagraph = document.querySelectorAll('.blog-content')[newParagraphIndex] as
+    const paragraph = document.querySelectorAll('.blog-content')[index] as
       | HTMLDivElement
       | undefined
-    newParagraph?.focus()
+    paragraph?.focus()
   }, 50)
 }
 
