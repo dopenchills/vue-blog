@@ -3,7 +3,7 @@
   <p>
     Each section has <span style="color: blue">blue</span> borders. Outer containers have
     <span>black</span> borders, and inner containers have
-    <span style="color: gray">gray</span> borders
+    <span style="color: red">red</span> borders
   </p>
   <div class="section">
     <h2>Flex grow</h2>
@@ -243,6 +243,20 @@
       <div class="flex-item" style="flex-basis: content">flex-basis: content</div>
     </div>
   </div>
+  <div>
+    <h2>`flex-shrink` vs `min-width`</h2>
+    <ul>
+      <li>`min-width` wins</li>
+    </ul>
+    <caption>
+      The flex containers below have width of 500px. The items have `min-width: 300px`. The items
+      will not shrink as the `min-width` wins.
+    </caption>
+    <div class="flex-container" style="width: 500px">
+      <div class="flex-item" style="min-width: 300px">min-width: 300px</div>
+      <div class="flex-item" style="min-width: 300px">min-width: 300px</div>
+    </div>
+  </div>
 </template>
 
 <style>
@@ -258,7 +272,7 @@
 }
 
 .flex-item {
-  border: gray 1px solid;
+  border: red 1px solid;
   margin-top: 10px;
   margin-bottom: 10px;
 }
